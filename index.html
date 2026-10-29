@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Territórios em Resistência — povos indígenas do Brasil</title>
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--bg:#f4f0e7;--ink:#18241d;--muted:#647068;--forest:#244c3b;--lime:#d4e36a;--rust:#a6422b;--line:#d8d4c9;--card:#fffdf7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:#1f654b;text-underline-offset:3px}header{background:var(--forest);color:#fffdf7;padding:24px clamp(18px,5vw,72px) 54px;position:relative;overflow:hidden}header:after{content:"";position:absolute;width:330px;height:330px;border:1px solid #ffffff30;border-radius:50%;right:-80px;top:-120px;box-shadow:0 0 0 35px #ffffff08,0 0 0 70px #ffffff08;pointer-events:none}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:800;color:var(--lime)}nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:48px}nav a{color:#e8eee6;text-decoration:none;font-size:.9rem}.hero{max-width:1000px;position:relative;z-index:1}.hero h1{font-family:Georgia,serif;font-weight:500;letter-spacing:-.045em;font-size:clamp(2.6rem,7vw,5.7rem);line-height:.98;margin:14px 0 20px;max-width:850px}.hero p{max-width:700px;font-size:1.08rem;line-height:1.65;color:#e0e8df}.hero .note{font-size:.83rem;color:#cbd9cc;border-left:3px solid var(--lime);padding-left:12px;margin-top:24px}
+main{max-width:1320px;margin:auto;padding:30px clamp(14px,3vw,38px) 70px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:10px 0 18px}.section-head h2{font:500 clamp(1.7rem,3vw,2.5rem) Georgia,serif;margin:5px 0}.section-head p{max-width:620px;color:var(--muted);line-height:1.5;margin:0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0 34px}.stat{border:1px solid var(--line);background:#ffffff80;border-radius:15px;padding:18px}.stat b{display:block;font:500 2rem Georgia,serif;color:var(--forest)}.stat span{font-size:.86rem;color:var(--muted)}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}.filters select,.filters input{font:inherit;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 12px;color:var(--ink)}.filters input{flex:1;min-width:190px}
+.map-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(290px,.8fr);gap:16px}.map-shell,.panel{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card)}#map,#peopleMap{height:570px;width:100%;background:#e2e8dc}.map-caption{padding:12px 15px;font-size:.78rem;color:var(--muted);border-top:1px solid var(--line)}.panel{padding:18px;display:flex;flex-direction:column;min-height:610px}.panel h3{font:500 1.5rem Georgia,serif;margin:6px 0 8px}.panel .intro{font-size:.88rem;color:var(--muted);line-height:1.5;margin:0 0 12px}.case-list{display:flex;flex-direction:column;gap:10px;overflow:auto;max-height:420px}.case{padding:13px;border:1px solid var(--line);border-radius:12px;cursor:pointer;background:white}.case:hover,.case.active{border-color:var(--forest);box-shadow:inset 3px 0 var(--forest)}.case-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.72rem;color:var(--muted)}.tag{background:#f2d8ce;color:#7a2e20;border-radius:99px;padding:4px 8px;font-weight:800}.case h4{margin:8px 0 5px;font-size:1rem}.case p{margin:0;color:#4f5a52;font-size:.84rem;line-height:1.5}.source-link{display:inline-block;margin-top:10px;font-size:.8rem;font-weight:700}.disclaimer{font-size:.77rem;line-height:1.5;color:var(--muted);margin-top:auto;padding-top:16px}
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:52px}.feature{border-radius:16px;padding:24px;background:var(--forest);color:#fffdf7;min-height:240px}.feature.light{background:#e7e5d9;color:var(--ink)}.feature h3{font:500 1.8rem Georgia,serif;margin:12px 0}.feature p{line-height:1.65;color:inherit;opacity:.9}.timeline{margin-top:48px}.timeline-items{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.timecard{border-top:3px solid var(--forest);padding:14px 4px}.timecard b{font:500 1.4rem Georgia,serif}.timecard p{color:var(--muted);font-size:.88rem;line-height:1.55}
+.sources{margin-top:48px;padding:24px;border:1px solid var(--line);border-radius:16px;background:#ffffff80}.sources h3{font:500 1.7rem Georgia,serif;margin-top:0}.sources li{margin:9px 0;line-height:1.5}.footer{background:#18241d;color:#e0e8df;padding:28px clamp(18px,5vw,72px);font-size:.82rem;line-height:1.6}.footer strong{color:var(--lime)}
+@media(max-width:850px){.map-layout{grid-template-columns:1fr}.panel{min-height:auto}.case-list{max-height:none}.content-grid{grid-template-columns:1fr}.timeline-items{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}#map,#peopleMap{height:420px}nav{margin-bottom:32px}}
+
+/* Camada visual inspirada em grafismos geométricos — padrão autoral, sem atribuição a um povo específico */
+:root{--bg:#f5efe2;--ink:#24251d;--muted:#655f50;--forest:#244c3b;--lime:#e4c45b;--rust:#9e3f2d;--line:#d5c8ad;--card:#fffaf0;--clay:#bd6d43;--night:#202c26}
+body{background-color:var(--bg);background-image:repeating-linear-gradient(135deg,transparent 0 26px,rgba(158,63,45,.035) 26px 28px),repeating-linear-gradient(45deg,transparent 0 34px,rgba(36,76,59,.03) 34px 36px)}
+header{position:relative;overflow:hidden;background:linear-gradient(120deg,#203e31,#315d43 58%,#8d472f)}
+header:after{content:"";position:absolute;right:-22px;top:0;width:210px;height:100%;opacity:.24;background:repeating-linear-gradient(45deg,transparent 0 12px,#e4c45b 12px 15px,transparent 15px 27px),repeating-linear-gradient(-45deg,transparent 0 12px,#f5efe2 12px 15px,transparent 15px 27px);pointer-events:none}
+nav a{border-bottom:1px solid rgba(255,255,255,.25)}
+.eyebrow{letter-spacing:.13em}
+.pattern-band{height:14px;margin:0 0 22px;background:repeating-linear-gradient(135deg,#e4c45b 0 8px,#244c3b 8px 16px,#bd6d43 16px 24px,#f5efe2 24px 32px);border-top:1px solid #244c3b;border-bottom:1px solid #244c3b}
+.people-section{margin-top:48px}.people-map-section{margin-top:42px}.people-map-section .map-shell{margin-top:14px}.people-map-section .leaflet-popup-content{max-width:300px;line-height:1.45}.people-map-section .leaflet-popup-content strong{color:var(--forest)}
+.people-head{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.people-controls{display:grid;grid-template-columns:minmax(220px,1fr) minmax(180px,260px);gap:10px;margin:18px 0}
+.people-controls input,.people-controls select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fffaf0;color:var(--ink);font:inherit}
+.people-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.people-card{position:relative;border:1px solid var(--line);border-radius:13px;padding:16px;background:rgba(255,250,240,.94);overflow:hidden}
+.people-card:before{content:"";display:block;height:5px;margin:-16px -16px 13px;background:repeating-linear-gradient(90deg,#244c3b 0 18px,#e4c45b 18px 27px,#9e3f2d 27px 36px,#f5efe2 36px 45px)}
+.people-card h3{font:600 1.08rem Georgia,serif;margin:0 0 5px}
+.people-card .place{font-size:.78rem;color:#6e573b;font-weight:800;margin-bottom:9px}
+.people-card p{font-size:.88rem;line-height:1.52;margin:7px 0;color:#4b4a40}
+.people-card .struggle{padding-top:8px;border-top:1px solid #e2d7c1}
+.count-note{font-size:.82rem;color:var(--muted);margin:8px 0 15px}
+.no-results{padding:24px;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}
+@media(max-width:950px){.people-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.people-grid{grid-template-columns:1fr}.people-controls{grid-template-columns:1fr}.people-head{align-items:start}}
+
+
+/* Paleta revisada: verde-floresta e marrom-terra */
+:root{
+ --bg:#211b16;--ink:#eee5d5;--muted:#c0b29d;--forest:#183d30;
+ --lime:#d4b56a;--rust:#8b4b32;--line:#594536;--card:#30271f;
+ --clay:#a76543;--night:#151d18
+}
+body{background-color:var(--bg);color:var(--ink);
+ background-image:repeating-linear-gradient(135deg,transparent 0 26px,rgba(212,181,106,.035) 26px 28px),
+ repeating-linear-gradient(45deg,transparent 0 34px,rgba(93,132,102,.045) 34px 36px)}
+header{background:linear-gradient(120deg,#102c22,#1d4936 58%,#593522)}
+nav a{color:#f0e7d8}
+.hero p,.hero .note{color:#e2d7c5}
+.stat,.sources,.people-card,.case,.map-shell,.panel,.filters select,.filters input,
+.people-controls input,.people-controls select{background:#30271f;color:var(--ink);border-color:#594536}
+.stat span,.section-head p,.people-card p,.case p,.panel .intro,.map-caption,
+.count-note,.timecard p,.disclaimer{color:#c0b29d}
+.stat b,.people-card h3,.panel h3,.timecard b,.sources h3{color:#e3c58b}
+.feature{background:#173c2e;color:#f2eadc}
+.feature.light{background:#382b20;color:#f2eadc}
+.feature.light p{color:#e0d2bd}
+.people-card:before{background:repeating-linear-gradient(90deg,#173c2e 0 18px,#d4b56a 18px 27px,#8b4b32 27px 36px,#30271f 36px 45px)}
+.people-card .place{color:#dfbd80}
+.people-card .struggle{border-color:#594536}
+.case:hover,.case.active{border-color:#d4b56a;box-shadow:inset 3px 0 #d4b56a}
+.tag{background:#593326;color:#f2d8c2}
+.sources a,.source-link{color:#e0bd78}
+.footer{background:#101b15;color:#e0d5c3}
+.people-detail{margin:18px 0 16px;padding:18px;border:1px solid #69513d;border-radius:15px;background:linear-gradient(145deg,#30271f,#1c382c);display:none}
+.people-detail.open{display:block}
+.people-detail h3{font:500 1.55rem Georgia,serif;color:#e3c58b;margin:0 0 5px}
+.people-detail .detail-place{color:#dfbd80;font-size:.86rem;font-weight:700}
+.people-detail .detail-struggle{line-height:1.6;color:#e6dccb}
+.people-photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:14px}
+.people-photo{margin:0;border:1px solid #69513d;border-radius:11px;overflow:hidden;background:#211b16}
+.people-photo img{display:block;width:100%;height:210px;object-fit:cover;background:#3b3025}
+.people-photo figcaption{padding:9px;font-size:.76rem;line-height:1.4;color:#d2c4ad}
+.people-photo a{color:#e0bd78}
+.detail-note{font-size:.78rem;line-height:1.5;color:#c0b29d;margin:12px 0 0}
+.people-card{cursor:pointer}
+.people-card:focus-visible{outline:3px solid #d4b56a;outline-offset:3px}
+@media(max-width:600px){.people-photo img{height:190px}}
+
+</style>
+</head>
+<body>
+<header>
+<nav><a href="#mapa">Mapa de ocorrências</a><a href="#mapa-povos">Mapa dos povos</a><a href="#povos">Povos e territórios</a><a href="#historia">Contexto histórico</a><a href="#fontes">Fontes e método</a></nav>
+<div class="hero">
+<div class="eyebrow">Memória • Território • Justiça</div>
+<h1>Territórios em<br>resistência.</h1>
+<p>Um mapa de casos documentados e uma seleção pesquisável de povos indígenas, seus territórios e lutas. O visual usa padrões geométricos autorais como referência gráfica geral — não reproduz grafismos sagrados ou específicos de uma comunidade.</p>
+<div class="note">Protótipo editorial • Casos iniciais em revisão contínua • Atualizado em 29 de outubro de 2026</div>
+</div>
+</header>
+<main>
+
+<section id="mapa">
+<div class="section-head"><div><div class="eyebrow" style="color:var(--forest)">Explore o território</div><h2>Mapa de violências e denúncias no contexto eleitoral</h2></div><p>Acompanhe denúncias, ameaças e episódios relacionados ao contexto eleitoral. Selecione um marcador ou use os filtros. Os pontos indicam localidades associadas aos relatos — não delimitam terras indígenas. Cada registro deve ser lido junto à fonte e ao seu status de apuração.</p></div>
+<div class="filters">
+<input id="search" type="search" placeholder="Buscar povo, lugar ou palavra-chave…">
+<select id="kind"><option value="">Todos os tipos de ocorrência</option><option>Ameaça de invasão</option><option>Assassinato / morte denunciada</option><option>Atropelamento denunciado</option><option>Violência política</option><option>Verificação / contexto</option><option>Ameaça contra comunidade</option></select>
+<select id="region"><option value="">Todas as regiões</option><option value="Norte">Norte</option><option value="Centro-Oeste">Centro-Oeste</option><option value="Sul">Sul</option></select>
+</div>
+<div class="map-layout">
+<div class="map-shell"><div id="map" role="application" aria-label="Mapa interativo de ocorrências documentadas"></div><div class="map-caption">Mapa-base © OpenStreetMap contributors. A localização é aproximada quando a reportagem não informa coordenadas precisas.</div></div>
+<aside class="panel" id="casos"><div class="eyebrow" style="color:var(--forest)">Arquivo inicial</div><h3>Casos documentados</h3><p class="intro">Os registros abaixo resumem denúncias publicadas por veículos jornalísticos e organizações. Denúncia não equivale a conclusão judicial.</p><div class="case-list" id="caseList"></div><p class="disclaimer">O site não publica nomes de suspeitos como culpados sem decisão ou evidência documentada. Alegações e versões divergentes são atribuídas às fontes.</p></aside>
+</div>
+</section>
+<section class="content-grid">
+<div class="feature"><div class="eyebrow">Destaque • Eleições 2026</div><h3>Ameaças antes e depois do segundo turno</h3><p>Reportagens publicadas em outubro de 2026 relataram ameaças de invasão de território no Pará caso Flávio Bolsonaro vencesse e novas denúncias de ataques contra comunidades no Mato Grosso do Sul após a divulgação do resultado eleitoral. Em 28 de outubro, o MPF/MS informou que abriu procedimentos para apurar denúncias; não trate acusações sob investigação como fatos judicialmente comprovados. O site registra a cronologia sem presumir que todos os episódios tenham a mesma autoria ou motivação.</p><a href="https://www1.folha.uol.com.br/cotidiano/2026/10/indigenas-recebem-audios-com-ameaca-de-invasao-a-territorio-se-flavio-bolsonaro-ganhar-eleicoes.shtml" style="color:var(--lime)">Ler reportagem da Folha →</a><br><a href="https://almapreta.com.br/sessao/cotidiano/indigenas-ataques-resultado-eleicoes/" style="color:var(--lime)">Ler reportagem da Alma Preta →</a></div>
+<div class="feature light"><div class="eyebrow" style="color:var(--forest)">Como ler os registros</div><h3>Denunciar com rigor</h3><p>Cada ficha deve separar o que foi confirmado, o que uma fonte relata, o que está sob investigação e o que ainda não se sabe. O mapa também deve documentar respostas de órgãos públicos, decisões judiciais, ações de proteção e iniciativas das próprias comunidades.</p><p><strong>Princípio editorial:</strong> povos indígenas são sujeitos políticos, guardiões de conhecimentos e autores de sua própria história — não apenas vítimas.</p></div>
+</section>
+
+<section class="people-map-section" id="mapa-povos">
+  <div class="section-head"><div><div class="eyebrow" style="color:var(--forest)">Territórios e diversidade</div><h2>Mapa interativo dos povos indígenas listados</h2></div><p>O mapa reúne os povos apresentados nas fichas abaixo. Cada marcador abre o nome do povo, a referência geográfica e um resumo de suas lutas territoriais. As posições são aproximadas e não representam limites oficiais de Terras Indígenas.</p></div>
+  <div class="map-shell"><div id="peopleMap" role="application" aria-label="Mapa aproximado dos povos indígenas desta seleção"></div><div class="map-caption">Localizações aproximadas por região ou referência geográfica descrita na ficha; não substituem mapas territoriais oficiais da Funai ou do ISA.</div></div>
+</section>
+
+<section class="people-section" id="povos">
+  <div class="pattern-band" aria-hidden="true"></div>
+  <div class="people-head">
+    <div><div class="eyebrow">Povos, territórios e direitos</div><h2>Quem resiste no território</h2>
+    <p class="section-intro">Uma seleção inicial de povos indígenas e de algumas das pressões territoriais que enfrentam. A situação varia entre comunidades e deve ser confirmada com fontes indígenas e órgãos competentes.</p></div>
+    <div class="eyebrow">Busca por nome, estado ou luta</div>
+  </div>
+  <div class="people-controls">
+    <input id="people-search" type="search" placeholder="Buscar povo, estado, garimpo, demarcação..." aria-label="Buscar povos indígenas">
+    <select id="people-region" aria-label="Filtrar por região">
+      <option value="">Todas as regiões</option>
+      <option value="Norte">Norte</option><option value="Nordeste">Nordeste</option>
+      <option value="Centro-Oeste">Centro-Oeste</option><option value="Sudeste">Sudeste</option>
+      <option value="Sul">Sul</option><option value="Várias regiões">Várias regiões / contextos específicos</option>
+    </select>
+  </div>
+  <p class="count-note" id="people-count" aria-live="polite"></p>
+  <section class="people-detail" id="people-detail" aria-live="polite" aria-label="Detalhes e fotografias do povo selecionado"></section>
+  <div class="people-grid" id="people-grid"></div>
+  <p class="count-note">Nota de escopo: o Censo 2022 identificou 391 etnias, povos ou grupos indígenas no Brasil. Esta seleção reproduz os nomes reunidos no material de referência fornecido para esta versão; não deve ser apresentada como a lista oficial completa de todos os povos do país.</p>
+</section>
+
+
+
+
+<section class="timeline" id="historia">
+<div class="section-head"><div><div class="eyebrow" style="color:var(--forest)">Contexto histórico</div><h2>A violência tem história. A resistência também.</h2></div><p>Uma linha do tempo inicial para conectar acontecimentos de diferentes épocas. Os textos são introdutórios e devem ser aprofundados com fontes históricas e indígenas.</p></div>
+<div class="timeline-items">
+<div class="timecard"><b>Séculos XVI–XIX</b><p>Colonização, escravização, epidemias, catequização forçada, guerras e expulsões territoriais transformaram profundamente as sociedades indígenas.</p></div>
+<div class="timecard"><b>1910–1967</b><p>O Serviço de Proteção aos Índios foi criado em 1910. Relatórios posteriores documentaram violências e abusos ligados à política indigenista estatal, incluindo o Relatório Figueiredo.</p></div>
+<div class="timecard"><b>1988</b><p>A Constituição Federal reconheceu a organização social, línguas, costumes, crenças, tradições e direitos originários dos povos indígenas.</p></div>
+<div class="timecard"><b>Hoje</b><p>Demarcação, retomadas, proteção territorial e enfrentamento a invasões, garimpo, desmatamento e violência continuam sendo temas centrais de disputa e mobilização.</p></div>
+</div>
+</section>
+<section class="sources" id="fontes"><h3>Fontes e metodologia</h3>
+<ul>
+<li><a href="https://apiboficial.org/" target="_blank" rel="noopener">APIB — Articulação dos Povos Indígenas do Brasil</a>: notas, mobilizações e denúncias feitas por organizações indígenas.</li>
+<li><a href="https://cimi.org.br/" target="_blank" rel="noopener">CIMI — Conselho Indigenista Missionário</a>: relatórios de violência, direitos territoriais e contexto regional.</li>
+<li><a href="https://caci.cimi.org.br/" target="_blank" rel="noopener">CACI — Cartografia dos Ataques Contra Indígenas</a>: registros de assassinatos de indígenas desde 1985.</li>
+<li><a href="https://www.gov.br/funai/pt-br" target="_blank" rel="noopener">Funai</a> e <a href="https://www.gov.br/povosindigenas/pt-br" target="_blank" rel="noopener">Ministério dos Povos Indígenas</a>: informações e posicionamentos oficiais.</li>
+<li><a href="https://midiaindigena.com.br/" target="_blank" rel="noopener">Mídia Indígena</a>: cobertura feita por comunicadores indígenas, com notícias sobre territórios, participação política, ameaças e direitos.</li>
+<li><a href="https://www.cartacapital.com.br/sociedade/indigenas-criam-canal-inspirado-no-exercito-de-lula/" target="_blank" rel="noopener">CartaCapital — Exército dos Povos Indígenas</a>: cobertura de uma iniciativa de mobilização digital indígena; é uma voz de mobilização e não deve ser tratada, isoladamente, como confirmação independente de cada denúncia.</li>
+<li><a href="https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-08/relatorio-aponta-258-indigenas-assassinados-e-mais-violencia-em-2025" target="_blank" rel="noopener">Agência Brasil / relatório do CIMI, 13/08/2026</a>: balanço de 2025 registrou 258 indígenas assassinados, 169 casos de conflitos territoriais e 210 registros de invasões, exploração ilegal de recursos ou danos ao patrimônio indígena.</li>
+<li><a href="https://www.mpf.mp.br/o-mpf/unidades/pr-ms/noticias/mpf-abre-investigacoes-sobre-onda-de-violencia-e-ataques-contra-comunidades-indigenas-em-mato-grosso-do-sul" target="_blank" rel="noopener">MPF/MS, 28/10/2026</a>: informa a abertura de procedimentos para investigar denúncias de violência e intimidação em Mato Grosso do Sul e esclarece que boatos sobre supostos homicídios políticos em Naviraí foram desmentidos na apuração.</li>
+<li><a href="https://midiaindigena.com.br/destaques/16/10/2026/mpi-pede-ao-ministerio-publico-federal-e-ao-ministerio-publico-do-trabalho-que-criem-forca-tarefa-para-auxiliar-a-fiscalizacao-na-garantia-ao-acesso-de-indigenas-aos-locais-de-votacao-no-2o-turno-das/" target="_blank" rel="noopener">Mídia Indígena, 16/10/2026</a>: pedido de força-tarefa para apurar denúncias de impedimento de acesso de indígenas às urnas no segundo turno.</li>
+<li><a href="https://midiaindigena.com.br/news/01/10/2026/comunidade-denuncia-criminalizacao-de-cacique-guajajara-apos-mobilizacao-envolvendo-a-mineradora-vale-no-maranhao/" target="_blank" rel="noopener">Mídia Indígena, 01/10/2026</a>: comunidade denuncia criminalização de cacique Guajajara após mobilização envolvendo a Vale; a reportagem ressalta a versão comunitária e a situação processual.</li>
+<li><a href="https://midiaindigena.com.br/destaques/29/09/2026/white-solder-tem-ate-r-108-milhoes-em-bens-bloqueados-por-ligacao-com-garimpo-na-terra-yanomami/" target="_blank" rel="noopener">Mídia Indígena, 29/09/2026</a>: reportagem sobre bloqueio de bens em ação ligada à suspeita de extração e comercialização ilegal de minérios da Terra Yanomami; bloqueio judicial não equivale a condenação definitiva.</li>
+<li><a href="https://midiaindigena.com.br/destaques/05/03/2026/movimento-indigena-cobra-continuidade-da-protecao-na-terra-indigena-uru-eu-wau-wau/" target="_blank" rel="noopener">Mídia Indígena, 05/03/2026</a>: organizações indígenas pedem continuidade da proteção na TI Uru-Eu-Wau-Wau.</li>
+<li><a href="https://www1.folha.uol.com.br/cotidiano/2026/10/indigenas-denunciam-servidor-por-audio-em-que-sugere-envenenar-agua-apos-eleicao-homem-e-afastado.shtml" target="_blank" rel="noopener">Folha de S.Paulo, 28/10/2026</a>: notícia sobre áudio com sugestão de envenenar água em Tacuru (MS), afastamento de servidor e apuração. O caso deve ser descrito como denúncia sob investigação.</li>
+<li><a href="https://www1.folha.uol.com.br/cotidiano/2026/10/indigenas-recebem-audios-com-ameaca-de-invasao-a-territorio-se-flavio-bolsonaro-ganhar-eleicoes.shtml" target="_blank" rel="noopener">Folha de S.Paulo, outubro de 2026</a>: reportagem sobre áudios que ameaçavam invasão à TI Apyterewa caso Flávio Bolsonaro vencesse a eleição.</li>
+
+<li><a href="https://news.folhadoprogresso.com.br/ameacas-perseguicao-e-mortes-indigenas-denunciam-aumento-da-violencia-politica/" target="_blank" rel="noopener">Folha do Progresso, 28/10/2026</a>: compilação de relatos sobre o conflito em Votouro (RS), ameaças a Yanomami e Apyterewa, com versões e ressalvas atribuídas às fontes.</li>
+</ul>
+<p><strong>Regra de publicação:</strong> toda ficha deve ter data da ocorrência, data da publicação, local, povo afetado, natureza do registro, estado da apuração e link para a fonte original. Atualizações e correções devem ficar visíveis.</p>
+</section>
+</main>
+<footer class="footer"><strong>Territórios em Resistência</strong> — protótipo inicial de educação histórica e documentação pública.<br>Este arquivo é uma demonstração navegável, não uma base de dados completa. A lista de povos é uma seleção inicial e não substitui o levantamento oficial do IBGE/ISA nem a validação de organizações indígenas. Para visualizar os mapas e marcadores, é necessária conexão à internet. A participação e a validação de organizações e comunidades indígenas são essenciais antes de uma publicação definitiva.</footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const indigenousPeople = [{"name": "Huni Kuin (Kaxinawá)", "place": "Acre — vales dos rios Purus, Tarauacá e Jordão", "struggle": "Proteção da floresta, vigilância territorial e defesa dos conhecimentos tradicionais diante da pressão madeireira, do desmatamento e das invasões."}, {"name": "Ashaninka", "place": "Acre — região do rio Amônia, Marechal Thaumaturgo", "struggle": "Enfrentamento à exploração madeireira ilegal e às invasões transfronteiriças; proteção da floresta e dos rios."}, {"name": "Yawanawá", "place": "Acre — região do rio Gregório", "struggle": "Defesa do território, fortalecimento cultural e proteção da biodiversidade diante da pressão sobre a floresta."}, {"name": "Shanenawa", "place": "Acre — região de Feijó", "struggle": "Reconhecimento territorial, preservação da língua e da cultura e garantia de serviços públicos adequados."}, {"name": "Shawãdawa (Arara do Acre)", "place": "Acre — região do rio Juruá", "struggle": "Proteção territorial, recuperação cultural e defesa dos recursos florestais."}, {"name": "Tikúna (Ticuna)", "place": "Amazonas — Alto Solimões, fronteiras com Colômbia e Peru", "struggle": "Defesa dos territórios e dos recursos pesqueiros e florestais; acesso adequado a saneamento, saúde e educação."}, {"name": "Kokama", "place": "Amazonas — especialmente Alto Solimões; comunidades em outras regiões", "struggle": "Reconhecimento da identidade indígena, regularização territorial e proteção dos rios e das áreas de pesca."}, {"name": "Baniwa", "place": "Amazonas — Alto Rio Negro, São Gabriel da Cachoeira", "struggle": "Proteção da floresta, dos rios e dos territórios coletivos; fortalecimento da educação escolar indígena e das línguas."}, {"name": "Yanomami", "place": "Amazonas e Roraima — fronteira com a Venezuela", "struggle": "Combate ao garimpo ilegal, ao mercúrio nos rios, à malária, à desnutrição e à violência associada às invasões."}, {"name": "Ye'kwana", "place": "Roraima e Amazonas — também na Venezuela", "struggle": "Proteção territorial contra o garimpo, segurança alimentar e preservação dos conhecimentos tradicionais."}, {"name": "Marubo", "place": "Amazonas — Vale do Javari", "struggle": "Proteção territorial contra invasores, caçadores e pescadores ilegais; defesa dos povos isolados da região."}, {"name": "Matis", "place": "Amazonas — Vale do Javari", "struggle": "Vigilância territorial, proteção da floresta e assistência à saúde em contexto de riscos associados ao contato externo."}, {"name": "Matsés", "place": "Amazonas — Vale do Javari, fronteira com Peru", "struggle": "Defesa das terras e recursos naturais contra invasões e atividades ilegais."}, {"name": "Apurinã", "place": "Amazonas — sobretudo ao longo do rio Purus", "struggle": "Regularização das terras, combate ao desmatamento e à exploração ilegal de recursos."}, {"name": "Sateré-Mawé", "place": "Amazonas e Pará — região dos rios Andirá e baixo Amazonas", "struggle": "Defesa territorial, proteção do patrimônio cultural ligado ao guaraná tradicional e resistência às pressões fundiárias."}, {"name": "Deni", "place": "Amazonas — bacias dos rios Juruá e Purus", "struggle": "Proteção de áreas florestais contra invasões, exploração madeireira e pressões econômicas externas."}, {"name": "Munduruku", "place": "Pará — sudoeste do estado e região do Tapajós", "struggle": "Combate ao garimpo ilegal e ao mercúrio, resistência a projetos que ameaçam o Tapajós e defesa da demarcação."}, {"name": "Kayapó (Mebêngôkre)", "place": "Pará e norte de Mato Grosso", "struggle": "Combate ao garimpo, à extração ilegal de madeira e ao avanço agropecuário sobre a floresta."}, {"name": "Xikrin do Cateté", "place": "Pará — região de Parauapebas e Ourilândia do Norte", "struggle": "Proteção dos rios e da floresta diante da mineração, do desmatamento e dos impactos de grandes empreendimentos."}, {"name": "Araweté", "place": "Pará — médio Xingu", "struggle": "Proteção do território contra invasões e desmatamento; defesa dos recursos naturais e do modo de vida."}, {"name": "Asurini do Xingu", "place": "Pará — região do Xingu", "struggle": "Preservação territorial e cultural diante do desmatamento e das transformações ambientais."}, {"name": "Aikewara (Suruí do Pará)", "place": "Pará — sudeste, região de São Geraldo do Araguaia", "struggle": "Proteção da terra, recuperação de áreas degradadas e defesa da floresta contra invasões."}, {"name": "Arara da Volta Grande do Xingu", "place": "Pará — Volta Grande do Xingu", "struggle": "Defesa do rio e dos ecossistemas afetados por mudanças no fluxo das águas, inclusive impactos associados a Belo Monte."}, {"name": "Tembé", "place": "Pará — nordeste, Alto Rio Guamá e Gurupi", "struggle": "Enfrentamento de invasões, exploração madeireira, conflitos fundiários e pressões sobre os recursos florestais."}, {"name": "Uru-Eu-Wau-Wau (Jupaú)", "place": "Rondônia — Terra Indígena Uru-Eu-Wau-Wau", "struggle": "Combate à grilagem, ao desmatamento, às invasões e às ameaças contra defensores territoriais."}, {"name": "Karipuna de Rondônia", "place": "Rondônia — região de Porto Velho", "struggle": "Defesa da terra contra grileiros e madeireiros e proteção de comunidades vulneráveis a invasões e violência."}, {"name": "Cinta Larga", "place": "Rondônia e Mato Grosso", "struggle": "Enfrentamento ao garimpo ilegal, à exploração de diamantes e a conflitos ligados aos recursos minerais."}, {"name": "Makuxi (Macuxi)", "place": "Roraima — região da Raposa Serra do Sol; também na Guiana", "struggle": "Defesa da integridade territorial e resistência a invasões e pressões agropecuárias."}, {"name": "Wapichana", "place": "Roraima — nordeste do estado; também na Guiana", "struggle": "Regularização territorial, proteção de nascentes e florestas e enfrentamento de conflitos fundiários."}, {"name": "Ingarikó", "place": "Roraima — região do Monte Roraima", "struggle": "Proteção territorial e ambiental, defesa de lugares sagrados e respeito aos direitos indígenas em áreas protegidas."}, {"name": "Guajajara (Tenetehara)", "place": "Maranhão — TIs Arariboia, Cana Brava e outras", "struggle": "Combate à exploração ilegal de madeira, queimadas, grilagem e invasões; defensores territoriais sofrem ameaças."}, {"name": "Awá-Guajá", "place": "Maranhão — TIs Awá, Caru e Alto Turiaçu", "struggle": "Proteção contra madeireiros, desmatamento e invasões; risco agravado para grupos isolados ou de contato recente."}, {"name": "Canela (Ramkokamekrá e Apanyekrá)", "place": "Maranhão — região de Barra do Corda", "struggle": "Defesa territorial, proteção dos recursos naturais e enfrentamento de pressões agropecuárias e conflitos fundiários."}, {"name": "Krikati", "place": "Maranhão — sudoeste, região de Montes Altos", "struggle": "Proteção da terra contra invasões, queimadas e exploração ilegal de recursos."}, {"name": "Pataxó", "place": "Bahia — sul, Porto Seguro, Santa Cruz Cabrália e entorno", "struggle": "Retomadas territoriais, demarcação e resistência a conflitos com fazendeiros e à pressão imobiliária e turística."}, {"name": "Pataxó Hã-Hã-Hãe", "place": "Bahia — sul, região de Pau Brasil", "struggle": "Recuperação de territórios tradicionais, enfrentamento de conflitos fundiários e proteção contra ameaças e violência."}, {"name": "Tupinambá de Olivença", "place": "Bahia — Ilhéus, Una e Buerarema", "struggle": "Reconhecimento e demarcação territorial, resistência a disputas fundiárias e defesa da Mata Atlântica."}, {"name": "Kiriri", "place": "Bahia — norte, região de Banzaê", "struggle": "Consolidação territorial, preservação cultural e proteção dos recursos naturais contra pressões externas."}, {"name": "Tuxá", "place": "Bahia — região de Rodelas; comunidades em outros estados", "struggle": "Defesa territorial e dos direitos afetados por barragens e transformações do rio São Francisco."}, {"name": "Pankararé", "place": "Bahia — norte, região do Raso da Catarina", "struggle": "Proteção territorial, preservação da Caatinga e garantia de acesso sustentável à água."}, {"name": "Pankararu", "place": "Pernambuco — região de Petrolândia, Tacaratu e Jatobá", "struggle": "Defesa territorial, enfrentamento de conflitos fundiários e proteção de lugares sagrados."}, {"name": "Xukuru do Ororubá", "place": "Pernambuco — Pesqueira e Poção", "struggle": "Defesa da terra demarcada, combate a ameaças contra lideranças e fortalecimento da autonomia comunitária."}, {"name": "Fulni-ô", "place": "Pernambuco — Águas Belas", "struggle": "Preservação da língua Yaathê, proteção territorial e continuidade das práticas culturais e religiosas."}, {"name": "Atikum", "place": "Pernambuco e Bahia — região da Serra do Umã", "struggle": "Reconhecimento territorial, acesso à água e proteção de áreas tradicionais diante das pressões fundiárias."}, {"name": "Truká", "place": "Pernambuco — Ilha de Assunção, rio São Francisco", "struggle": "Defesa do território insular, proteção dos recursos hídricos e enfrentamento de impactos ambientais e conflitos fundiários."}, {"name": "Potiguara", "place": "Paraíba — Baía da Traição, Marcação e Rio Tinto", "struggle": "Defesa territorial, proteção dos manguezais e do litoral e resistência às pressões de empreendimentos econômicos."}, {"name": "Tabajara", "place": "Paraíba — litoral sul", "struggle": "Reconhecimento territorial, recuperação de áreas tradicionais e proteção da Mata Atlântica."}, {"name": "Anacé", "place": "Ceará — Caucaia e São Gonçalo do Amarante", "struggle": "Defesa territorial diante de empreendimentos industriais e portuários, especialmente no entorno do Pecém."}, {"name": "Tapeba", "place": "Ceará — Caucaia", "struggle": "Demarcação territorial, proteção de manguezais e lagoas e resistência à expansão urbana."}, {"name": "Tremembé", "place": "Ceará — litoral de Itarema e municípios próximos", "struggle": "Defesa dos territórios costeiros contra especulação imobiliária, empreendimentos turísticos e degradação ambiental."}, {"name": "Guarani Kaiowá", "place": "Mato Grosso do Sul — sul do estado, incluindo Dourados, Caarapó e Amambai", "struggle": "Retomada e demarcação de terras, resistência a despejos e ataques armados e enfrentamento da pressão do agronegócio."}, {"name": "Guarani Ñandeva (Avá-Guarani)", "place": "Mato Grosso do Sul, Paraná e outras áreas do Sul/Sudeste", "struggle": "Recuperação de territórios tradicionais, proteção contra violência e combate aos efeitos de agrotóxicos e expansão agrícola."}, {"name": "Terena", "place": "Mato Grosso do Sul — Aquidauana, Miranda e Dois Irmãos do Buriti", "struggle": "Demarcação de terras, resistência a conflitos fundiários e fortalecimento da produção agrícola e da educação indígena."}, {"name": "Ofaié", "place": "Mato Grosso do Sul — região de Brasilândia", "struggle": "Proteção territorial, recuperação cultural e linguística e conservação das áreas naturais remanescentes."}, {"name": "Guató", "place": "Pantanal de Mato Grosso e Mato Grosso do Sul", "struggle": "Proteção das áreas alagáveis, defesa do modo de vida ligado aos rios e enfrentamento de incêndios e degradação ambiental."}, {"name": "Xavante (A'uwẽ)", "place": "Mato Grosso — leste do estado", "struggle": "Demarcação e proteção territorial, combate a invasões e desmatamento e defesa do Cerrado."}, {"name": "Bororo (Boe)", "place": "Mato Grosso — regiões central e sudeste", "struggle": "Recuperação territorial, proteção de lugares sagrados e enfrentamento das pressões agropecuárias e da degradação ambiental."}, {"name": "Bakairi", "place": "Mato Grosso — Paranatinga e Planalto da Serra", "struggle": "Proteção dos territórios, preservação cultural e defesa dos recursos naturais diante de atividades externas."}, {"name": "Enawenê-Nawê", "place": "Mato Grosso — noroeste", "struggle": "Proteção dos rios, peixes e florestas; resistência a impactos de barragens e empreendimentos hidrelétricos."}, {"name": "Nambikwara", "place": "Mato Grosso ocidental e áreas próximas de Rondônia", "struggle": "Combate ao garimpo ilegal, à exploração madeireira e à invasão territorial; garimpo na TI Sararé causou grave devastação."}, {"name": "Paresí (Haliti)", "place": "Mato Grosso — planalto dos Parecis", "struggle": "Defesa territorial, proteção de nascentes e busca de modelos produtivos que respeitem direitos indígenas e ambiente."}, {"name": "Rikbaktsa", "place": "Mato Grosso — noroeste, rios como o Juruena", "struggle": "Proteção da floresta contra desmatamento, exploração madeireira e pressão de empreendimentos."}, {"name": "Kaingang", "place": "Paraná, Santa Catarina, Rio Grande do Sul e São Paulo", "struggle": "Demarcação e recuperação de territórios, combate a conflitos fundiários e proteção de áreas tradicionais fragmentadas."}, {"name": "Guarani Mbya", "place": "Sul e Sudeste — PR, SC, RS, SP, RJ e ES", "struggle": "Defesa de territórios pressionados por urbanização, rodovias e turismo; preservação da Mata Atlântica e de lugares sagrados."}, {"name": "Xokleng (Laklãnõ)", "place": "Santa Catarina — Vale do Itajaí", "struggle": "Recuperação territorial, proteção de áreas afetadas por barragens e defesa de direitos em disputas judiciais."}, {"name": "Charrua", "place": "Rio Grande do Sul — região metropolitana de Porto Alegre", "struggle": "Reconhecimento étnico, recuperação territorial e garantia de espaço para práticas culturais e continuidade comunitária."}, {"name": "Krenak", "place": "Minas Gerais — região do rio Doce", "struggle": "Recuperação ambiental após o rompimento da barragem de Fundão em 2015 e defesa do território e de lugares sagrados."}, {"name": "Puri", "place": "Minas Gerais, Rio de Janeiro e regiões próximas", "struggle": "Reafirmação da identidade indígena, recuperação da memória e da língua e busca por reconhecimento territorial."}, {"name": "Maxakali (Tikmũ'ũn)", "place": "Minas Gerais — Vale do Mucuri", "struggle": "Recuperação de terras, combate à degradação ambiental, proteção de fontes de água e preservação das línguas e tradições."}, {"name": "Xakriabá", "place": "Minas Gerais — norte, São João das Missões", "struggle": "Defesa territorial, acesso à água, proteção do Cerrado e enfrentamento do desmatamento e de pressões agropecuárias."}, {"name": "Pankararu em contexto urbano", "place": "Pernambuco e comunidades em São Paulo", "struggle": "Além das lutas territoriais, comunidades migrantes enfrentam desafios de moradia, reconhecimento e acesso a políticas públicas."}, {"name": "Warao", "place": "Originários da Venezuela; presentes em vários estados brasileiros", "struggle": "Acesso a moradia, documentação, saúde, educação e acolhimento adequado, sem perda de seus direitos como povo indígena."}, {"name": "Akuntsu", "place": "Rondônia", "struggle": "Povo com população extremamente reduzida; necessita de proteção rigorosa contra invasões e riscos à continuidade física e cultural."}, {"name": "Avá-Canoeiro", "place": "Goiás e Tocantins", "struggle": "Histórico de expulsões e violência; proteção territorial e condições para manter a continuidade cultural."}, {"name": "Piripkura", "place": "Mato Grosso", "struggle": "Grupo com indígenas em isolamento ou contato muito restrito; ameaças de invasões, desmatamento e exploração econômica."}, {"name": "Kawahiva do Rio Pardo", "place": "Mato Grosso", "struggle": "Povo isolado que necessita de proteção territorial contra madeireiros, grileiros e outras invasões."}, {"name": "Korubo", "place": "Amazonas — Vale do Javari", "struggle": "Proteção territorial e de saúde diante dos riscos de contato externo e invasões."}, {"name": "Povo isolado do Mamoriá Grande", "place": "Amazonas", "struggle": "Proteção contra pressão econômica e contato forçado, que pode causar doenças, violência e risco à sobrevivência."}];
+const regionFor = (place) => {
+ const p=place.toLowerCase();
+ if(/acre|amazonas|pará|rondônia|roraima|alto solimões|rio negro|vale do javari|tapajós|xingu|mamoriá/.test(p)) return "Norte";
+ if(/maranhão|bahia|pernambuco|paraíba|ceará/.test(p)) return "Nordeste";
+ if(/mato grosso do sul|mato grosso|pantanal/.test(p)) return "Centro-Oeste";
+ if(/minas gerais|rio de janeiro|são paulo|espírito santo/.test(p)) return "Sudeste";
+ if(/paraná|santa catarina|rio grande do sul/.test(p)) return "Sul";
+ if(/venezuela|vários estados|contexto urbano/.test(p)) return "Várias regiões";
+ return "Várias regiões";
+};
+// Mapa 2: localizações aproximadas das referências geográficas de cada ficha.
+// Não são polígonos nem limites de Terras Indígenas.
+const stateCenters={
+ 'acre':[-9.4,-70.5],'amazonas':[-4.5,-64.5],'roraima':[2.0,-61.5],'pará':[-3.7,-52.5],'rondônia':[-10.8,-63.2],'amapá':[1.0,-51.5],'tocantins':[-10.5,-48.2],
+ 'maranhão':[-5.0,-45.0],'bahia':[-12.5,-41.5],'pernambuco':[-8.3,-37.5],'paraíba':[-7.1,-36.5],'ceará':[-5.2,-39.5],'alagoas':[-9.5,-36.5],
+ 'mato grosso do sul':[-21.5,-55.5],'mato grosso':[-12.5,-55.5],'goiás':[-15.8,-49.5],'distrito federal':[-15.8,-47.9],
+ 'minas gerais':[-18.5,-44.5],'são paulo':[-22.5,-48.5],'rio de janeiro':[-22.5,-43.5],'espírito santo':[-19.5,-40.7],
+ 'paraná':[-24.8,-51.5],'santa catarina':[-27.2,-50.5],'rio grande do sul':[-29.5,-53.0]
+};
+function approximatePeopleCoords(place,index){
+ const p=place.toLocaleLowerCase('pt-BR');
+ const landmarks=[
+  [/rio amônia|marechal thaumaturgo/,[-8.95,-72.8]],[/rio gregório/,[-7.5,-71.9]],[/alto solimões|tabatinga/,[-4.25,-69.9]],[/são gabriel da cachoeira|alto rio negro/,[-0.13,-67.1]],[/vale do javari/,[-5.2,-71.0]],[/terra yanomami|yanomami/, [2.3,-63.0]],[/rio xingu|xingu/,[-3.5,-52.0]],[/tapajós|munduruku/,[-6.5,-57.0]],[/rio negro/,[-0.5,-65.0]],[/feijó/,[-8.16,-70.35]],[/juruá/,[-7.5,-72.5]],[/pantanal/,[-19.5,-57.0]],[/são joão das missões|xakriabá/,[-14.9,-44.0]],[/apyt(er|e)wa/,[-6.55,-52.05]],[/vários estados|várias regiões|contexto urbano/,[-15.0,-48.0]]
+ ];
+ for(const [re,xy] of landmarks){if(re.test(p))return [xy[0]+((index%5)-2)*0.08,xy[1]+((index%7)-3)*0.08];}
+ for(const [state,xy] of Object.entries(stateCenters)){if(p.includes(state))return [xy[0]+((index%5)-2)*0.11,xy[1]+((index%7)-3)*0.12];}
+ return [-14.0+((index%5)-2)*0.12,-52.0+((index%7)-3)*0.12];
+}
+const peopleMap=L.map('peopleMap',{minZoom:3,maxZoom:10,maxBounds:[[-35,-75],[6,-32]],maxBoundsViscosity:0.85}).setView([-14,-52],4);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'}).addTo(peopleMap);
+const peopleMapMarkers=[];
+indigenousPeople.forEach((person,index)=>{
+ const coords=approximatePeopleCoords(person.place,index);
+ const marker=L.circleMarker(coords,{radius:5,color:'#fffaf0',weight:1.5,fillColor:'#244c3b',fillOpacity:.92});
+ marker.bindPopup(`<strong>${escapeHTML(person.name)}</strong><br><small>${escapeHTML(person.place)}</small><p><strong>Lutas e desafios:</strong> ${escapeHTML(person.struggle)}</p><small>Toque no marcador para abrir a ficha e buscar fotografias.</small>`);
+ marker.on('click',()=>showPersonDetail(person));
+ marker.addTo(peopleMap);peopleMapMarkers.push({marker,person,index});
+});
+function renderPeopleMap(shown){
+ const names=new Set(shown.map(p=>p.name));
+ peopleMapMarkers.forEach(({marker,person})=>{if(names.has(person.name)){if(!peopleMap.hasLayer(marker))marker.addTo(peopleMap);}else if(peopleMap.hasLayer(marker)){peopleMap.removeLayer(marker);}});
+}
+let activePeoplePhotoRequest=0;
+function showPersonDetail(person){
+ const box=document.getElementById('people-detail');
+ if(!box)return;
+ const requestId=++activePeoplePhotoRequest;
+ box.classList.add('open');
+ box.innerHTML=`<h3>${escapeHTML(person.name)}</h3><div class="detail-place">${escapeHTML(person.place)}</div><p class="detail-struggle"><strong>Lutas e desafios:</strong> ${escapeHTML(person.struggle)}</p><p class="detail-note" id="photo-status">Buscando fotografias de referência no Wikimedia Commons…</p><div class="people-photo-grid" id="people-photo-grid"></div><p class="detail-note">As imagens são resultados de busca no Wikimedia Commons. Confira a legenda, a autoria e o contexto antes de reutilizar ou atribuir uma fotografia a uma comunidade específica. A ausência de imagem não significa ausência de registro ou de representação do povo.</p>`;
+ box.scrollIntoView({behavior:'smooth',block:'nearest'});
+ const query=`${person.name} indigenous people Brazil`;
+ const api=`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent('filetype:bitmap '+query)}&gsrnamespace=6&gsrlimit=6&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=900&format=json&origin=*`;
+ fetch(api).then(r=>{if(!r.ok)throw new Error('Falha na consulta');return r.json();}).then(data=>{
+  if(requestId!==activePeoplePhotoRequest)return;
+  const pages=Object.values(data.query?.pages||{}).filter(x=>x.imageinfo?.[0]?.thumburl||x.imageinfo?.[0]?.url);
+  const grid=document.getElementById('people-photo-grid');
+  const status=document.getElementById('photo-status');
+  if(!pages.length){status.textContent='Não encontramos fotografias identificáveis para este termo no Wikimedia Commons. Você pode enviar uma imagem ou indicar uma fonte confiável para acrescentarmos.';return;}
+  status.textContent=`${pages.length} resultado(s) de imagem encontrado(s). A identificação deve ser conferida na página original.`;
+  grid.innerHTML=pages.slice(0,4).map(page=>{
+   const info=page.imageinfo[0], meta=info.extmetadata||{};
+   const title=page.title.replace(/^File:/,'');
+   const artist=(meta.Artist?.value||'Autoria não informada').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+   const license=(meta.LicenseShortName?.value||meta.UsageTerms?.value||'Licença não identificada').replace(/<[^>]*>/g,' ').trim();
+   const fileUrl=info.thumburl||info.url;
+   const pageUrl=info.descriptionurl||('https://commons.wikimedia.org/wiki/'+encodeURIComponent(page.title.replace(/ /g,'_')));
+   return `<figure class="people-photo"><a href="${pageUrl}" target="_blank" rel="noopener"><img src="${fileUrl}" loading="lazy" alt="Resultado de imagem do Wikimedia Commons: ${escapeHTML(title)}"></a><figcaption><strong>${escapeHTML(title)}</strong><br>${escapeHTML(artist)}<br>${escapeHTML(license)}<br><a href="${pageUrl}" target="_blank" rel="noopener">Ver arquivo e licença ↗</a></figcaption></figure>`;
+  }).join('');
+ }).catch(()=>{
+  if(requestId!==activePeoplePhotoRequest)return;
+  const status=document.getElementById('photo-status');
+  if(status)status.textContent='Não foi possível carregar as imagens agora. Verifique a conexão ou tente novamente mais tarde.';
+ });
+}
+function renderPeople(){
+ const q=(document.getElementById('people-search')?.value||'').toLocaleLowerCase('pt-BR').trim();
+ const reg=document.getElementById('people-region')?.value||'';
+ const shown=indigenousPeople.filter(p=>{
+  const hay=(p.name+' '+p.place+' '+p.struggle).toLocaleLowerCase('pt-BR');
+  return (!q||hay.includes(q))&&(!reg||regionFor(p.place)===reg);
+ });
+ const grid=document.getElementById('people-grid');
+ document.getElementById('people-count').textContent=`Exibindo ${shown.length} de ${indigenousPeople.length} registros desta seleção.`;
+ grid.innerHTML=shown.map(p=>`<article class="people-card" data-person="${escapeHTML(p.name)}" tabindex="0" role="button" aria-label="Abrir ficha de ${escapeHTML(p.name)}"><h3>${escapeHTML(p.name)}</h3><div class="place">${escapeHTML(p.place)}</div><p class="struggle"><strong>Lutas e desafios:</strong> ${escapeHTML(p.struggle)}</p></article>`).join('')||'<div class="no-results">Nenhum povo encontrado. Tente outro nome, estado ou termo.</div>';
+ renderPeopleMap(shown);
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+document.getElementById('people-search')?.addEventListener('input',renderPeople);
+document.getElementById('people-region')?.addEventListener('change',renderPeople);
+document.getElementById('people-grid')?.addEventListener('click',e=>{
+ const card=e.target.closest('.people-card');if(!card)return;
+ const person=indigenousPeople.find(p=>p.name===card.dataset.person);if(person)showPersonDetail(person);
+});
+document.getElementById('people-grid')?.addEventListener('keydown',e=>{
+ if(e.key!=='Enter'&&e.key!==' ')return;
+ const card=e.target.closest('.people-card');if(!card)return;
+ e.preventDefault();const person=indigenousPeople.find(p=>p.name===card.dataset.person);if(person)showPersonDetail(person);
+});
+renderPeople();
+
+</script>
+<script>
+// ATUALIZAÇÃO EDITORIAL DIÁRIA DO MAPA DE OCORRÊNCIAS:
+// Para acrescentar um caso, inclua um novo objeto neste array, mantendo um id único e
+// preenchendo title, date, place, people, region, kind, lat, lon, summary, source e url.
+// Atribua denúncias à fonte, indique o que está confirmado/em apuração e não trate
+// alegações como fatos comprovados. Depois, publique novamente este index.html no Netlify.
+const records = [
+ {id:1,title:"Apyterewa: ameaças de invasão antes do segundo turno",date:"12 out. 2026",place:"São Félix do Xingu, Pará",people:"Parakanã",region:"Norte",kind:"Ameaça de invasão",lat:-6.55,lon:-52.05,summary:"A Folha relatou oito áudios com ameaças de invasão à Terra Indígena Apyterewa caso Flávio Bolsonaro vencesse. O Ministério dos Povos Indígenas, a Funai, a PF e o Ibama informaram acompanhar a situação; a autoria e os fatos são matéria de apuração.",source:"Folha de S.Paulo",url:"https://www1.folha.uol.com.br/cotidiano/2026/10/indigenas-recebem-audios-com-ameaca-de-invasao-a-territorio-se-flavio-bolsonaro-ganhar-eleicoes.shtml"},
+ {id:2,title:"Checagem de rumor sobre mortes em Naviraí",date:"out. 2026",place:"Naviraí, Mato Grosso do Sul",people:"Comunidades indígenas da região",region:"Centro-Oeste",kind:"Verificação / contexto",lat:-23.06,lon:-54.19,summary:"Importante correção: segundo reportagem da Folha que cita o Ministério Público Federal, a alegação de assassinatos indígenas com motivação política em Naviraí era falsa; o caso local mencionado foi descrito como tentativa de duplo homicídio ligada a conflito interpessoal/familiar, sem motivação política ou étnica identificada. Não trate o rumor como fato confirmado.",source:"Folha de S.Paulo / MPF",url:"https://www.mpf.mp.br/o-mpf/unidades/pr-ms/noticias/mpf-abre-investigacoes-sobre-onda-de-violencia-e-ataques-contra-comunidades-indigenas-em-mato-grosso-do-sul"},
+ {id:3,title:"Atropelamentos denunciados",date:"27 out. 2026",place:"Coronel Sapucaia, Mato Grosso do Sul",people:"Comunidades indígenas locais; identificação específica a confirmar",region:"Centro-Oeste",kind:"Atropelamento denunciado",lat:-23.27,lon:-55.53,summary:"Segundo reportagem da Alma Preta que cita a APIB, houve denúncias de atropelamentos em Coronel Sapucaia após o resultado eleitoral. O vínculo de cada ocorrência com motivação política precisa ser apurado, não presumido.",source:"Alma Preta / APIB",url:"https://almapreta.com.br/sessao/cotidiano/indigenas-ataques-resultado-eleicoes/"},
+ {id:4,title:"Áudio com ameaça contra comunidades",date:"27 out. 2026",place:"Tacuru e Nioaque, Mato Grosso do Sul",people:"Comunidades indígenas locais",region:"Centro-Oeste",kind:"Ameaça contra comunidade",lat:-23.63,lon:-54.69,summary:"A APIB denunciou um áudio com ameaça de envenenar água consumida por comunidades indígenas. Em 28/10, o MPF informou ter aberto procedimentos para apurar as denúncias em MS e cobrou informações da prefeitura de Tacuru; a autoria e os fatos seguem sob investigação.",source:"MPF/MS (apuração) e APIB",url:"https://www.mpf.mp.br/o-mpf/unidades/pr-ms/noticias/mpf-abre-investigacoes-sobre-onda-de-violencia-e-ataques-contra-comunidades-indigenas-em-mato-grosso-do-sul"},
+ {id:5,title:"Mortes durante conflito em território indígena",date:"13 out. 2026 (reportagem em 28 out.)",place:"Terra Indígena Votouro, Rio Grande do Sul",people:"Kaingang",region:"Sul",kind:"Violência política",lat:-27.57,lon:-52.35,summary:"Reportagem da Agência Pública republicada pela Folha do Progresso relata três mortes no contexto de um confronto na TI Votouro. Indígenas entrevistados apontam perseguição política; a Brigada Militar apresentou outra versão sobre o confronto. A investigação criminal estava em andamento segundo a reportagem.",source:"Folha do Progresso / Agência Pública",url:"https://news.folhadoprogresso.com.br/ameacas-perseguicao-e-mortes-indigenas-denunciam-aumento-da-violencia-politica/"},
+ {id:6,title:"Ameaças de retorno do garimpo",date:"out. 2026",place:"Terra Indígena Yanomami, Roraima",people:"Yanomami",region:"Norte",kind:"Ameaça de invasão",lat:2.55,lon:-63.65,summary:"Reportagem relata que lideranças Yanomami receberam telefonemas de garimpeiros ameaçando retornar ao território caso Flávio Bolsonaro fosse eleito. A ficha resume o relato jornalístico e não identifica autores individuais.",source:"Folha do Progresso / Agência Pública",url:"https://news.folhadoprogresso.com.br/ameacas-perseguicao-e-mortes-indigenas-denunciam-aumento-da-violencia-politica/"}
+];
+const map = L.map('map',{minZoom:3,maxZoom:10,maxBounds:[[-35,-75],[6,-32]],maxBoundsViscosity:0.85}).setView([-14,-52],4);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+const markers = new Map();
+records.forEach(r=>{
+ const marker=L.circleMarker([r.lat,r.lon],{radius:8,color:'#fffdf7',weight:2,fillColor:'#a6422b',fillOpacity:.95});
+ marker.bindPopup(`<strong>${r.title}</strong><br>${r.place}<br><small>${r.date}</small>`);
+ marker.on('click',()=>selectCase(r.id,false));
+ marker.addTo(map);markers.set(r.id,marker);
+});
+function selectCase(id,pan=true){
+ const r=records.find(x=>x.id===id); if(!r)return;
+ document.querySelectorAll('.case').forEach(el=>el.classList.toggle('active',Number(el.dataset.id)===id));
+ const m=markers.get(id); if(m){if(pan)map.setView([r.lat,r.lon],Math.max(map.getZoom(),6));m.openPopup();}
+}
+function render(){
+ const q=document.getElementById('search').value.toLowerCase().trim();
+ const kind=document.getElementById('kind').value, region=document.getElementById('region').value;
+ const filtered=records.filter(r=>(!q||[r.title,r.place,r.people,r.summary,r.kind].join(' ').toLowerCase().includes(q))&&(!kind||r.kind===kind)&&(!region||r.region===region));
+ document.getElementById('caseList').innerHTML=filtered.map(r=>`<article class="case" data-id="${r.id}" tabindex="0" role="button" aria-label="Ver ${r.title}"><div class="case-top"><span>${r.date}</span><span class="tag">${r.kind}</span></div><h4>${r.title}</h4><p><strong>${r.place}</strong> · ${r.people}</p><p style="margin-top:7px">${r.summary}</p><a class="source-link" href="${r.url}" target="_blank" rel="noopener">Fonte: ${r.source} ↗</a></article>`).join('')||'<p>Nenhum registro corresponde aos filtros.</p>';
+ records.forEach(r=>{const visible=filtered.some(x=>x.id===r.id);if(visible){if(!map.hasLayer(markers.get(r.id)))markers.get(r.id).addTo(map)}else{if(map.hasLayer(markers.get(r.id)))map.removeLayer(markers.get(r.id))}});
+ document.querySelectorAll('.case').forEach(el=>{el.addEventListener('click',e=>{if(e.target.closest('a'))return;selectCase(Number(el.dataset.id))});el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectCase(Number(el.dataset.id))}})});
+}
+['search','kind','region'].forEach(id=>document.getElementById(id).addEventListener(id==='search'?'input':'change',render));
+render();
+</script>
+</body>
+</html>
